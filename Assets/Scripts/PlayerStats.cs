@@ -3,15 +3,7 @@ using UnityEngine.Networking;
 
 
 [System.Obsolete]
-public class PlayerStats : NetworkBehaviour
+public class PlayerStats : UnitStats
 {
-    [SerializeField] private int _maxHealth = 0;
-    [SyncVar] private int _currentHealth;
 
-    public override void OnStartAuthority()
-    {
-        base.OnStartAuthority();
-
-        _currentHealth = _maxHealth;
-    }
 }

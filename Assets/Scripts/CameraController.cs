@@ -3,7 +3,7 @@
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform _target = null;
+    [SerializeField] private Transform _target;
     [SerializeField] private Vector3 _offset = Vector3.zero;
     [SerializeField] private float _zoomSpeed = 4.0f;
     [SerializeField] private float _minZoom = 2.0f;

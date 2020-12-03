@@ -1,40 +1,62 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
 
-public class PlayerController : MonoBehaviour
+[System.Obsolete]
+public class PlayerController : NetworkBehaviour
 {
     [SerializeField] private LayerMask _movementMask;
 
     private Camera _camera;
-    private UnitMotor _motor;
+    private Character _character;
+
     private Ray _ray;
     private RaycastHit _hit;
 
-    private void Start()
+    private void Awake()
     {
         _camera = Camera.main;
-        _motor = GetComponent<UnitMotor>();
-        _camera.GetComponent<CameraController>().Target = transform;
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (isLocalPlayer)
         {
-            _ray = _camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(_ray, out _hit, 100.0f, _movementMask))
+            if (_character != null)
             {
-                _motor.MoveToPoint(_hit.point);
+                if (Input.GetMouseButtonDown(1))
+                {
+                    _ray = _camera.ScreenPointToRay(Input.mousePosition);
+
+                    if (Physics.Raycast(_ray, out _hit, 100.0f, _movementMask))
+                    {
+                        CmdSetMovePoint(_hit.point);
+                    }
+                }
             }
         }
+    }
 
-        if (Input.GetMouseButtonDown(0))
+    public void SetCharacter(Character character, bool isLocalPlayer)
+    {
+        _character = character;
+        if (isLocalPlayer)
         {
-            _ray = _camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(_ray, out _hit, 100.0f))
-            {
-                //todo
-            }
+            _camera.GetComponent<CameraController>().Target = character.transform;
+        }
+    }
+
+    [Command]
+    public void CmdSetMovePoint(Vector3 point)
+    {
+        _character.SetMovePoint(point);
+    }
+
+    private void OnDestroy()
+    {
+        if (_character != null)
+        {
+            Destroy(_character.gameObject);
         }
     }
 }

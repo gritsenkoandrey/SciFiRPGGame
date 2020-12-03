@@ -5,17 +5,22 @@ using UnityEngine.Networking;
 [System.Obsolete]
 public class NetUnitSetup : NetworkBehaviour
 {
-    [SerializeField] private MonoBehaviour[] _disableBehaviours = null;
+    [SerializeField] private MonoBehaviour[] _disableBehaviours;
 
     private void Awake()
     {
         // проверка, кому принадлежит объект, если не нам, то выключаем все поведенческие скрипты
-        if (!hasAuthority)
+
+        //if (!hasAuthority)
+        //{
+        //    for (int i = 0; i < _disableBehaviours.Length; i++)
+        //    {
+        //        _disableBehaviours[i].enabled = false;
+        //    }
+        //}
+        for (int i = 0; i < _disableBehaviours.Length; i++)
         {
-            for (int i = 0; i < _disableBehaviours.Length; i++)
-            {
-                _disableBehaviours[i].enabled = false;
-            }
+            _disableBehaviours[i].enabled = false;
         }
     }
 
@@ -23,7 +28,7 @@ public class NetUnitSetup : NetworkBehaviour
     // данную проверку можно не проводить.
     public override void OnStartAuthority()
     {
-        base.OnStartAuthority();
+        //base.OnStartAuthority();
 
         for (int i = 0; i < _disableBehaviours.Length; i++)
         {
