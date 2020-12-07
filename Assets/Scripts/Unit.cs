@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-
 [System.Obsolete]
-public class Unit : NetworkBehaviour
+public class Unit : Interactable
 {
     [SerializeField] protected UnitMotor _unitMotor;
     [SerializeField] protected UnitStats _unitStats;
 
+    protected Interactable focus;
     protected bool isDead;
+
+    public delegate void UnitDelegate();
+    [SyncEvent] public event UnitDelegate EventOnDamage;
+    [SyncEvent] public event UnitDelegate EventOnDie;
+    [SyncEvent] public event UnitDelegate EventOnRevive;
 
     private void Update()
     {
@@ -40,13 +45,45 @@ public class Unit : NetworkBehaviour
         }
     }
 
+    public override bool Interact(GameObject user)
+    {
+        Combat combat = user.GetComponent<Combat>();
+        if (combat != null)
+        {
+            if (combat.Attack(_unitStats))
+            {
+                EventOnDamage();
+                return true;
+            }
+        }
+        return base.Interact(user);
+    }
+
+    protected virtual void SetFocus(Interactable newFocus)
+    {
+        if (newFocus != focus)
+        {
+            focus = newFocus;
+            _unitMotor.FollowTarget(newFocus);
+        }
+    }
+
+    protected virtual void RemoveFocus()
+    {
+        focus = null;
+        _unitMotor.StopFollowingTarget();
+    }
+
     [ClientCallback]
     protected virtual void Die()
     {
         isDead = true;
         if (isServer)
         {
+            HasInteract = false;
+            RemoveFocus();
             _unitMotor.MoveToPoint(transform.position);
+            EventOnDie();
             RpcDie();
         }
     }
@@ -67,7 +104,9 @@ public class Unit : NetworkBehaviour
         isDead = false;
         if (isServer)
         {
+            HasInteract = true;
             _unitStats.SetHealthRate(1.0f);
+            EventOnRevive();
             RpcReviev();
         }
     }

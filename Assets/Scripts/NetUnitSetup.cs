@@ -2,7 +2,6 @@
 using UnityEngine.Networking;
 
 
-[System.Obsolete]
 public class NetUnitSetup : NetworkBehaviour
 {
     [SerializeField] private MonoBehaviour[] _disableBehaviours;

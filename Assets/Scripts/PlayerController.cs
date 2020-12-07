@@ -2,7 +2,6 @@
 using UnityEngine.Networking;
 
 
-[System.Obsolete]
 public class PlayerController : NetworkBehaviour
 {
     [SerializeField] private LayerMask _movementMask;
@@ -33,6 +32,19 @@ public class PlayerController : NetworkBehaviour
                         CmdSetMovePoint(_hit.point);
                     }
                 }
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    _ray = _camera.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(_ray, out _hit, 100.0f, ~(1 << LayerMask.NameToLayer("Player"))))
+                    {
+                        Interactable interactable = _hit.collider.GetComponent<Interactable>();
+                        if (interactable != null)
+                        {
+                            CmdSetFocus(interactable.GetComponent<NetworkIdentity>());
+                        }
+                    }
+                }
             }
         }
     }
@@ -44,6 +56,12 @@ public class PlayerController : NetworkBehaviour
         {
             _camera.GetComponent<CameraController>().Target = character.transform;
         }
+    }
+
+    [Command]
+    public void CmdSetFocus(NetworkIdentity newFocus)
+    {
+        _character.SetNewFocus(newFocus.GetComponent<Interactable>());
     }
 
     [Command]

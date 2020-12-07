@@ -1,22 +1,23 @@
 ﻿using UnityEngine;
 
 
-[System.Obsolete, RequireComponent(typeof(UnitMotor), typeof(PlayerStats))]
+[RequireComponent(typeof(UnitMotor), typeof(PlayerStats))]
 public class Character : Unit
 {
-    [SerializeField] private float _revievDelay = 5.0f;
+
+    [SerializeField] private float _reviveDelay = 5f;
     [SerializeField] private GameObject _gfx;
 
     private Vector3 _startPosition;
-    private float _revievTime;
+    private float _reviveTime;
 
-    private void Start()
+    void Start()
     {
         _startPosition = transform.position;
-        _revievTime = _revievDelay;
+        _reviveTime = _reviveDelay;
     }
 
-    private void Update()
+    void Update()
     {
         OnUpdate();
     }
@@ -25,14 +26,35 @@ public class Character : Unit
     {
         base.OnDeadUpdate();
 
-        if (_revievTime > 0)
+        if (_reviveTime > 0)
         {
-            _revievTime -= Time.deltaTime;
+            _reviveTime -= Time.deltaTime;
         }
         else
         {
-            _revievTime = _revievDelay;
+            _reviveTime = _reviveDelay;
             Revive();
+        }
+    }
+
+    protected override void OnAliveUpdate()
+    {
+        base.OnAliveUpdate();
+
+        if (focus != null)
+        {
+            if (!focus.HasInteract)
+            {
+                RemoveFocus();
+            }
+            else
+            {
+                float distance = Vector3.Distance(focus.interactionTransform.position, transform.position);
+                if (distance <= focus.radius)
+                {
+                    focus.Interact(gameObject);
+                }
+            }
         }
     }
 
@@ -59,7 +81,16 @@ public class Character : Unit
     {
         if (!isDead)
         {
+            RemoveFocus();
             _unitMotor.MoveToPoint(point);
+        }
+    }
+
+    public void SetNewFocus(Interactable newFocus)
+    {
+        if (!isDead)
+        {
+            if (newFocus.HasInteract) SetFocus(newFocus);
         }
     }
 }

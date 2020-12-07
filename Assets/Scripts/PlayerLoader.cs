@@ -2,7 +2,6 @@
 using UnityEngine.Networking;
 
 
-[System.Obsolete]
 public class PlayerLoader : NetworkBehaviour
 {
     [SerializeField] private GameObject _unitPrefab;

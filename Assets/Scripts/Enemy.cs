@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-[System.Obsolete, RequireComponent(typeof(UnitMotor), typeof(EnemyStats))]
+[RequireComponent(typeof(UnitMotor), typeof(EnemyStats))]
 public class Enemy : Unit
 {
     [Header("Movement")]
@@ -49,7 +49,52 @@ public class Enemy : Unit
     {
         base.OnAliveUpdate();
 
-        Wandering(Time.deltaTime);
+        if (focus == null)
+        {
+            Wandering(Time.deltaTime);
+
+            if (_agressive)
+            {
+                FindEnemy();
+            }
+        }
+        else
+        {
+            float distance = Vector3.Distance(focus.interactionTransform.position, transform.position);
+
+            if (distance > _viewDistance || !focus.HasInteract)
+            {
+                RemoveFocus();
+            }
+            else if (distance <= focus.radius)
+            {
+                focus.Interact(gameObject);
+            }
+        }
+    }
+
+    public override bool Interact(GameObject user)
+    {
+        if (base.Interact(user))
+        {
+            SetFocus(user.GetComponent<Interactable>());
+            return true;
+        }
+        return false;
+    }
+
+    private void FindEnemy()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _viewDistance, 1 << LayerMask.NameToLayer("Player"));
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            Interactable interactable = colliders[i].GetComponent<Interactable>();
+            if (interactable != null && interactable.HasInteract)
+            {
+                SetFocus(interactable);
+                break;
+            }
+        }
     }
 
     protected override void Revive()
@@ -75,8 +120,16 @@ public class Enemy : Unit
 
     private void RandomMove()
     {
-        _currentDistanation = Quaternion.AngleAxis(Random.Range(0.0f, 45.0f), Vector3.up)
+        _currentDistanation = Quaternion.AngleAxis(Random.Range(0.0f, 360.0f), Vector3.up)
             * new Vector3(_moveRadius, 0.0f, 0.0f) + _startPosition;
         _unitMotor.MoveToPoint(_currentDistanation);
+    }
+
+    protected override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _viewDistance);
     }
 }

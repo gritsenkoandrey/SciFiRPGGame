@@ -4,7 +4,7 @@
 [System.Serializable]
 public class Stat
 {
-    [SerializeField] private int _baseValue = 0;
+    [SerializeField] private int _baseValue;
 
     public int GetValue()
     {

@@ -143,7 +143,8 @@ GameObject:
   - component: {fileID: 3326805615385743486}
   - component: {fileID: 3326805615385743457}
   - component: {fileID: 8791144312522202106}
-  - component: {fileID: 7650304623596491224}
+  - component: {fileID: 8140223676397763467}
+  - component: {fileID: 5777461149061585684}
   m_Layer: 0
   m_Name: Enemy_Zombie_Male_01
   m_TagString: Untagged
@@ -159,7 +160,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3326805615385743459}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 250, y: 0, z: 245}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6434005325653301879}
@@ -339,6 +340,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf323f14f42fd754a8446e8394a50e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionTransform: {fileID: 3326805615385743458}
+  radius: 2
   _unitMotor: {fileID: 3326805615385743479}
   _unitStats: {fileID: 3326805615385743485}
   _moveRadius: 5
@@ -374,7 +377,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _disableBehaviours:
   - {fileID: 3326805615385743479}
---- !u!114 &7650304623596491224
+  - {fileID: 5903695765065146310}
+--- !u!114 &8140223676397763467
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -383,11 +387,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 3326805615385743459}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16cc193d5d6b58442b2d6bd20d4e0fb5, type: 3}
+  m_Script: {fileID: 11500000, guid: e5eaa48e45610204f9110671b41cba8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackSpeed: 0.5
+--- !u!114 &5777461149061585684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326805615385743459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 131e2d5a518f0544f93fc32ca06c8293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 3422682490081549225}
-  _agent: {fileID: 3326805615385743478}
+  _unit: {fileID: 3326805615385743486}
+  _combat: {fileID: 8140223676397763467}
 --- !u!1 &3327071880017554815
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,7 +647,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3327350374319016471}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1445,6 +1463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3331312871452520385}
   - component: {fileID: 3422682490081549225}
+  - component: {fileID: 5903695765065146310}
   m_Layer: 0
   m_Name: SM_Chr_Zombie_Male_01
   m_TagString: Untagged
@@ -1478,7 +1497,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ffdfcb810f2918b4f8fe9f917f07bc78, type: 3}
   m_Controller: {fileID: 9100000, guid: ae06a044e85aa3e4897af453e229a27e, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -1486,6 +1505,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5903695765065146310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3327886899515242527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16cc193d5d6b58442b2d6bd20d4e0fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 3422682490081549225}
+  _agent: {fileID: 3326805615385743478}
 --- !u!1 &3327895083765424433
 GameObject:
   m_ObjectHideFlags: 0

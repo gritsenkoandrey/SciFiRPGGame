@@ -9,14 +9,22 @@ public class UnitAnimation : MonoBehaviour
 
     private static readonly int _moving = Animator.StringToHash("Moving");
 
-    private void FixedUpdate()
+    private void Update()
     {
         Moving();
     }
 
     private void Moving()
     {
-        _animator.SetBool(_moving, _agent.hasPath);
+        if (_agent.velocity.magnitude == 0)
+        {
+            _animator.SetBool(_moving, false);
+        }
+        else
+        {
+            _animator.SetBool(_moving, true);
+        }
+        //_animator.SetBool(_moving, _agent.hasPath);
     }
 
     private void Hit()

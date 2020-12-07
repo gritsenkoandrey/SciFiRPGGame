@@ -427,7 +427,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6870453775031092208}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1616,6 +1616,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6868364105115766274}
   - component: {fileID: 6777247540557827506}
+  - component: {fileID: 5572256224606412245}
   m_Layer: 0
   m_Name: SM_Chr_Zombie_Female_01
   m_TagString: Untagged
@@ -1630,7 +1631,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6871719880445940842}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1649,7 +1650,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ffdfcb810f2918b4f8fe9f917f07bc78, type: 3}
   m_Controller: {fileID: 9100000, guid: ae06a044e85aa3e4897af453e229a27e, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -1657,6 +1658,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5572256224606412245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6871719880445940842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16cc193d5d6b58442b2d6bd20d4e0fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 6777247540557827506}
+  _agent: {fileID: 9035931880859112688}
 --- !u!1 &6871723070982546888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,7 +1875,8 @@ GameObject:
   - component: {fileID: 9035931880859112696}
   - component: {fileID: 9035931880859112679}
   - component: {fileID: 2976121875375021948}
-  - component: {fileID: 4136120553710081374}
+  - component: {fileID: 3386802239691091991}
+  - component: {fileID: 3949546951568451686}
   m_Layer: 0
   m_Name: Enemy_Zombie_Female_01
   m_TagString: Untagged
@@ -1876,7 +1892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9035931880859112677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 207.13556, y: 0, z: 221.66475}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 722557253191917297}
@@ -2056,6 +2072,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf323f14f42fd754a8446e8394a50e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionTransform: {fileID: 9035931880859112676}
+  radius: 2
   _unitMotor: {fileID: 9035931880859112689}
   _unitStats: {fileID: 9035931880859112699}
   _moveRadius: 5
@@ -2091,7 +2109,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _disableBehaviours:
   - {fileID: 9035931880859112689}
---- !u!114 &4136120553710081374
+  - {fileID: 5572256224606412245}
+--- !u!114 &3386802239691091991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2100,8 +2119,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 9035931880859112677}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16cc193d5d6b58442b2d6bd20d4e0fb5, type: 3}
+  m_Script: {fileID: 11500000, guid: e5eaa48e45610204f9110671b41cba8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackSpeed: 0.5
+--- !u!114 &3949546951568451686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9035931880859112677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 131e2d5a518f0544f93fc32ca06c8293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 6777247540557827506}
-  _agent: {fileID: 9035931880859112688}
+  _unit: {fileID: 9035931880859112696}
+  _combat: {fileID: 3386802239691091991}

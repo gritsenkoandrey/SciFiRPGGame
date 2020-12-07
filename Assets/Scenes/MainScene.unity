@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e212d0a3421eb5438ded8d290363d12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
+  _target: {fileID: 216692595191187641, guid: 2665e5751acc6cb4b8bbf79c19edc11a, type: 3}
   _offset: {x: 0, y: -0.5, z: -0.9}
   _zoomSpeed: 4
   _minZoom: 5
