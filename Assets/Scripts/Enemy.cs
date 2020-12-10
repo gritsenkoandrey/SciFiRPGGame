@@ -68,7 +68,10 @@ public class Enemy : Unit
             }
             else if (distance <= focus.radius)
             {
-                focus.Interact(gameObject);
+                if (!focus.Interact(gameObject))
+                {
+                    RemoveFocus();
+                }
             }
         }
     }

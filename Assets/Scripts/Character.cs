@@ -11,6 +11,8 @@ public class Character : Unit
     private Vector3 _startPosition;
     private float _reviveTime;
 
+    public Inventory inventory;
+
     void Start()
     {
         _startPosition = transform.position;
@@ -52,7 +54,12 @@ public class Character : Unit
                 float distance = Vector3.Distance(focus.interactionTransform.position, transform.position);
                 if (distance <= focus.radius)
                 {
-                    focus.Interact(gameObject);
+                    //focus.Interact(gameObject);
+
+                    if (!focus.Interact(gameObject))
+                    {
+                        RemoveFocus();
+                    }
                 }
             }
         }
@@ -75,6 +82,12 @@ public class Character : Unit
         {
             _unitMotor.MoveToPoint(_startPosition);
         }
+    }
+
+    public void SetInventory(Inventory inventory)
+    {
+        this.inventory = inventory;
+        inventory.dropPoint = transform;
     }
 
     public void SetMovePoint(Vector3 point)

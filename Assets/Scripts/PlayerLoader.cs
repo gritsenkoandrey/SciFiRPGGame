@@ -15,10 +15,9 @@ public class PlayerLoader : NetworkBehaviour
         // если игрок запустился на сервере
         if (isServer)
         {
-            GameObject unit = Instantiate(_unitPrefab, transform.position, Quaternion.identity);
-            NetworkServer.Spawn(unit);
-            _unitIdentity = unit.GetComponent<NetworkIdentity>();
-            _playerController.SetCharacter(unit.GetComponent<Character>(), true);
+            Character character = CreateCharacter();
+            _playerController.SetCharacter(character, true);
+            InventoryUi.instance.SetInventory(character.inventory);
         }
         // если игрок запустился на локальной машине
         else
@@ -32,10 +31,7 @@ public class PlayerLoader : NetworkBehaviour
     [Command]
     public void CmdCreatePlayer()
     {
-        GameObject unit = Instantiate(_unitPrefab, transform.position, Quaternion.identity);
-        NetworkServer.Spawn(unit);
-        _unitIdentity = unit.GetComponent<NetworkIdentity>();
-        _playerController.SetCharacter(unit.GetComponent<Character>(), false);
+        _playerController.SetCharacter(CreateCharacter(), false);
     }
 
     [ClientCallback]
@@ -44,7 +40,24 @@ public class PlayerLoader : NetworkBehaviour
         if (isLocalPlayer)
         {
             _unitIdentity = unit;
-            _playerController.SetCharacter(unit.GetComponent<Character>(), true);
+            Character character = unit.GetComponent<Character>();
+            _playerController.SetCharacter(character, true);
+            character.SetInventory(GetComponent<Inventory>());
+            InventoryUi.instance.SetInventory(character.inventory);
         }
+    }
+
+    public Character CreateCharacter()
+    {
+        GameObject unit = Instantiate(_unitPrefab, transform.position, Quaternion.identity);
+        NetworkServer.Spawn(unit);
+        _unitIdentity = unit.GetComponent<NetworkIdentity>();
+        unit.GetComponent<Character>().SetInventory(GetComponent<Inventory>());
+        return unit.GetComponent<Character>();
+    }
+
+    public override bool OnCheckObserver(NetworkConnection connection)
+    {
+        return false;
     }
 }
