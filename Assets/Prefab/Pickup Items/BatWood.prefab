@@ -105,6 +105,7 @@ MonoBehaviour:
   interactionTransform: {fileID: 2545215579788918573}
   radius: 1
   item: {fileID: 11400000, guid: 6e8c92bb467c8324db8e0ff793e3a76c, type: 2}
+  lifetime: 10
 --- !u!65 &3219158917411852417
 BoxCollider:
   m_ObjectHideFlags: 0

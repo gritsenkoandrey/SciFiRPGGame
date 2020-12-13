@@ -8,7 +8,7 @@ public class Item : ScriptableObject
     public Sprite icon = null;
     public ItemPickup pickupPrefab;
 
-    public virtual void Use()
+    public virtual void Use(Player player)
     {
         Debug.Log("Using " + name);
     }

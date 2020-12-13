@@ -9,10 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 216692595191187641}
+  - component: {fileID: 114640546604790138}
   - component: {fileID: 216692595191187640}
   - component: {fileID: 216692595191187643}
   - component: {fileID: 5866022462830804996}
   - component: {fileID: 114127536395984372}
+  - component: {fileID: 114388583540733984}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -34,6 +36,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114640546604790138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216692595191187642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f436d50ac4212534e8c3237b58ccb482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _character: {fileID: 0}
+  _inventory: {fileID: 0}
+  _equipment: {fileID: 0}
 --- !u!114 &216692595191187640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +99,7 @@ MonoBehaviour:
   _unitPrefab: {fileID: 4291519870253466597, guid: 54b478c971f6ecf498bf0b2fd62e291a,
     type: 3}
   _playerController: {fileID: 5866022462830804996}
+  _player: {fileID: 114640546604790138}
 --- !u!114 &5866022462830804996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,5 +127,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68aa03864f9e7b645a821ae889d94f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropPoint: {fileID: 0}
   space: 9
+  player: {fileID: 0}
+--- !u!114 &114388583540733984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216692595191187642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a1f17bbba2d3240b655b3fcea931ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}

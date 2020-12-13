@@ -1877,6 +1877,7 @@ GameObject:
   - component: {fileID: 2976121875375021948}
   - component: {fileID: 3386802239691091991}
   - component: {fileID: 3949546951568451686}
+  - component: {fileID: 114938722645052550}
   m_Layer: 0
   m_Name: Enemy_Zombie_Female_01
   m_TagString: Untagged
@@ -2138,3 +2139,20 @@ MonoBehaviour:
   _animator: {fileID: 6777247540557827506}
   _unit: {fileID: 9035931880859112696}
   _combat: {fileID: 3386802239691091991}
+--- !u!114 &114938722645052550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9035931880859112677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 490f5b041b067ee4b81c57ad444a4483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropItems:
+  - item: {fileID: 11400000, guid: 89d12485ebff8ac4e9cde85f1ebd9e83, type: 2}
+    rate: 100
+  - item: {fileID: 11400000, guid: 6e8c92bb467c8324db8e0ff793e3a76c, type: 2}
+    rate: 40

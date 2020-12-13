@@ -31,7 +31,7 @@ public class InventorySlot : MonoBehaviour
     public void OnRemoveButton()
     {
         // вызываем метод инвентаря, удаляющий предмет из слота
-        inventory.Remove(_item);
+        inventory.RemoveItem(_item);
     }
 
     // обработчик для нажатия на предмет
@@ -40,7 +40,7 @@ public class InventorySlot : MonoBehaviour
         // использование предмета
         if (_item != null)
         {
-            _item.Use();
+            inventory.UseItem(_item);
         }
     }
 }

@@ -153,6 +153,7 @@ MonoBehaviour:
   _unitStats: {fileID: 1466155843556179993}
   _reviveDelay: 5
   _gfx: {fileID: 6697121355832964505}
+  player: {fileID: 0}
 --- !u!114 &4291519870253466593
 MonoBehaviour:
   m_ObjectHideFlags: 0

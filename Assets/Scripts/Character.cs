@@ -4,14 +4,12 @@
 [RequireComponent(typeof(UnitMotor), typeof(PlayerStats))]
 public class Character : Unit
 {
-
     [SerializeField] private float _reviveDelay = 5f;
     [SerializeField] private GameObject _gfx;
 
     private Vector3 _startPosition;
     private float _reviveTime;
-
-    public Inventory inventory;
+    public Player player;
 
     void Start()
     {
@@ -84,12 +82,6 @@ public class Character : Unit
         }
     }
 
-    public void SetInventory(Inventory inventory)
-    {
-        this.inventory = inventory;
-        inventory.dropPoint = transform;
-    }
-
     public void SetMovePoint(Vector3 point)
     {
         if (!isDead)
@@ -103,7 +95,10 @@ public class Character : Unit
     {
         if (!isDead)
         {
-            if (newFocus.HasInteract) SetFocus(newFocus);
+            if (newFocus.HasInteract)
+            {
+                SetFocus(newFocus);
+            }
         }
     }
 }

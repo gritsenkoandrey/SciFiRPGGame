@@ -6,6 +6,7 @@ public class PlayerLoader : NetworkBehaviour
 {
     [SerializeField] private GameObject _unitPrefab;
     [SerializeField] private PlayerController _playerController;
+    [SerializeField] private Player _player;
 
     [SyncVar(hook = "HookUnitIdentity")] private NetworkIdentity _unitIdentity;
 
@@ -16,8 +17,8 @@ public class PlayerLoader : NetworkBehaviour
         if (isServer)
         {
             Character character = CreateCharacter();
+            _player.Setup(character, GetComponent<Inventory>(), GetComponent<Equipment>(), true);
             _playerController.SetCharacter(character, true);
-            InventoryUi.instance.SetInventory(character.inventory);
         }
         // если игрок запустился на локальной машине
         else
@@ -31,7 +32,9 @@ public class PlayerLoader : NetworkBehaviour
     [Command]
     public void CmdCreatePlayer()
     {
-        _playerController.SetCharacter(CreateCharacter(), false);
+        Character character = CreateCharacter();
+        _player.Setup(character, GetComponent<Inventory>(), GetComponent<Equipment>(), false);
+        _playerController.SetCharacter(character, false);
     }
 
     [ClientCallback]
@@ -41,9 +44,8 @@ public class PlayerLoader : NetworkBehaviour
         {
             _unitIdentity = unit;
             Character character = unit.GetComponent<Character>();
+            _player.Setup(character, GetComponent<Inventory>(), GetComponent<Equipment>(), true);
             _playerController.SetCharacter(character, true);
-            character.SetInventory(GetComponent<Inventory>());
-            InventoryUi.instance.SetInventory(character.inventory);
         }
     }
 
@@ -52,7 +54,6 @@ public class PlayerLoader : NetworkBehaviour
         GameObject unit = Instantiate(_unitPrefab, transform.position, Quaternion.identity);
         NetworkServer.Spawn(unit);
         _unitIdentity = unit.GetComponent<NetworkIdentity>();
-        unit.GetComponent<Character>().SetInventory(GetComponent<Inventory>());
         return unit.GetComponent<Character>();
     }
 

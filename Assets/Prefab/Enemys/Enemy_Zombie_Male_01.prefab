@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 8791144312522202106}
   - component: {fileID: 8140223676397763467}
   - component: {fileID: 5777461149061585684}
+  - component: {fileID: 5083784341742321083}
   m_Layer: 0
   m_Name: Enemy_Zombie_Male_01
   m_TagString: Untagged
@@ -406,6 +407,23 @@ MonoBehaviour:
   _animator: {fileID: 3422682490081549225}
   _unit: {fileID: 3326805615385743486}
   _combat: {fileID: 8140223676397763467}
+--- !u!114 &5083784341742321083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326805615385743459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 490f5b041b067ee4b81c57ad444a4483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropItems:
+  - item: {fileID: 11400000, guid: 6e8c92bb467c8324db8e0ff793e3a76c, type: 2}
+    rate: 100
+  - item: {fileID: 11400000, guid: 89d12485ebff8ac4e9cde85f1ebd9e83, type: 2}
+    rate: 40
 --- !u!1 &3327071880017554815
 GameObject:
   m_ObjectHideFlags: 0
