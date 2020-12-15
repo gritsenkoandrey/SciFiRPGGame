@@ -8,7 +8,7 @@ public class UnitMotor : MonoBehaviour
     private NavMeshAgent _agent;
     private Transform _target;
 
-    private void Start()
+    private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
     }
@@ -33,8 +33,12 @@ public class UnitMotor : MonoBehaviour
     private void FaceTarget()
     {
         Vector3 direction = _target.position - transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0.0f, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
+        direction.y = 0;
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
     }
 
     public void FollowTarget(Interactable newTarget)
@@ -48,5 +52,10 @@ public class UnitMotor : MonoBehaviour
         _agent.stoppingDistance = 0.0f;
         _agent.ResetPath();
         _target = null;
+    }
+
+    public void SetMoveSpeed(int speed)
+    {
+        _agent.speed = speed;
     }
 }

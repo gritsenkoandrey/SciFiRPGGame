@@ -290,6 +290,10 @@ MonoBehaviour:
   _maxHealth: 100
   damage:
     _baseValue: 10
+  armor:
+    _baseValue: 0
+  moveSpeed:
+    _baseValue: 7
 --- !u!143 &5219170120049906655
 CharacterController:
   m_ObjectHideFlags: 0

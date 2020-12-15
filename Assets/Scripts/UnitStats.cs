@@ -8,6 +8,8 @@ public class UnitStats : NetworkBehaviour
     [SyncVar] private int _currentHealth;
 
     public Stat damage;
+    public Stat armor;
+    public Stat moveSpeed;
 
     public int CurrentHealth
     {
@@ -19,17 +21,19 @@ public class UnitStats : NetworkBehaviour
 
     public override void OnStartServer()
     {
-        //base.OnStartServer();
-
         _currentHealth = _maxHealth;
     }
 
     public virtual void TakeDamage(int damage)
     {
-        _currentHealth -= damage;
-        if (_currentHealth <= 0)
+        damage -= armor.GetValue();
+        if (damage > 0)
         {
-            _currentHealth = 0;
+            _currentHealth -= damage;
+            if (_currentHealth <= 0)
+            {
+                _currentHealth = 0;
+            }
         }
     }
 

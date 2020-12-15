@@ -11,6 +11,8 @@ public class Character : Unit
     private float _reviveTime;
     public Player player;
 
+    new public PlayerStats stats { get { return _unitStats as PlayerStats; } }
+
     void Start()
     {
         _startPosition = transform.position;

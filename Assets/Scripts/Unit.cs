@@ -6,6 +6,7 @@ public class Unit : Interactable
 {
     [SerializeField] protected UnitMotor _unitMotor;
     [SerializeField] protected UnitStats _unitStats;
+    public UnitStats stats { get { return _unitStats; } }
 
     protected Interactable focus;
     protected bool isDead;
@@ -14,6 +15,12 @@ public class Unit : Interactable
     [SyncEvent] public event UnitDelegate EventOnDamage;
     [SyncEvent] public event UnitDelegate EventOnDie;
     [SyncEvent] public event UnitDelegate EventOnRevive;
+
+    public override void OnStartServer()
+    {
+        _unitMotor.SetMoveSpeed(_unitStats.moveSpeed.GetValue());
+        _unitStats.moveSpeed.onStatChanged += _unitMotor.SetMoveSpeed;
+    }
 
     private void Update()
     {

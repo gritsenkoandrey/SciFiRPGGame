@@ -18,5 +18,5 @@ MonoBehaviour:
     type: 3}
   equipSlot: 3
   damageModifier: 100
-  armorModifier: 0
-  speedModifier: 0
+  armorModifier: 50
+  speedModifier: 10
