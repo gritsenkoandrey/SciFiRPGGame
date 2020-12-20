@@ -10,6 +10,19 @@ public class Stat
 
     [SerializeField] private int _baseValue;
 
+    public int baseValue
+    {
+        get { return _baseValue; }
+        set
+        {
+            _baseValue = value;
+            if (onStatChanged != null)
+            {
+                onStatChanged(GetValue());
+            }
+        }
+    }
+
     private List<int> _modifiers = new List<int>();
 
     public int GetValue()

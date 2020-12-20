@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 [RequireComponent(typeof(UnitMotor), typeof(EnemyStats))]
@@ -14,9 +15,12 @@ public class Enemy : Unit
 
     [Header("Behaviour")]
     [SerializeField] private bool _agressive = true;
+    [SerializeField] private float _rewardExp;
     [SerializeField] private float _viewDistance = 5.0f;
     [SerializeField] private float _revievDelay = 5.0f;
+
     private float _revievTime;
+    private List<Character> _enemies = new List<Character>();
 
     private void Start()
     {
@@ -111,6 +115,19 @@ public class Enemy : Unit
         }
     }
 
+    protected override void Die()
+    {
+        base.Die();
+        if (isServer)
+        {
+            for (int i = 0; i < _enemies.Count; i++)
+            {
+                _enemies[i].player.progress.AddExp(_rewardExp / _enemies.Count);
+            }
+            _enemies.Clear();
+        }
+    }
+
     private void Wandering(float deltaTime)
     {
         _changePosTime -= deltaTime;
@@ -134,5 +151,15 @@ public class Enemy : Unit
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _viewDistance);
+    }
+
+    protected override void DamageWithCombat(GameObject user)
+    {
+        base.DamageWithCombat(user);
+        Character character = user.GetComponent<Character>();
+        if (character != null && !_enemies.Contains(character))
+        {
+            _enemies.Add(character);
+        }
     }
 }

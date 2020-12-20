@@ -59,7 +59,7 @@ public class Unit : Interactable
         {
             if (combat.Attack(_unitStats))
             {
-                EventOnDamage();
+                DamageWithCombat(user);
             }
             return true;
         }
@@ -79,6 +79,11 @@ public class Unit : Interactable
     {
         focus = null;
         _unitMotor.StopFollowingTarget();
+    }
+
+    protected virtual void DamageWithCombat(GameObject user)
+    {
+        EventOnDamage();
     }
 
     [ClientCallback]

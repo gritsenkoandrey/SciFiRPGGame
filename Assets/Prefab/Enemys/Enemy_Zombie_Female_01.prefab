@@ -2085,6 +2085,7 @@ MonoBehaviour:
   _minMoveDelay: 5
   _maxMoveDelay: 10
   _agressive: 1
+  _rewardExp: 100
   _viewDistance: 5
   _revievDelay: 5
 --- !u!65 &9035931880859112679
