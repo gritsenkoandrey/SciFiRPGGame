@@ -12,9 +12,9 @@ public class Unit : Interactable
     protected bool isDead;
 
     public delegate void UnitDelegate();
-    [SyncEvent] public event UnitDelegate EventOnDamage;
-    [SyncEvent] public event UnitDelegate EventOnDie;
-    [SyncEvent] public event UnitDelegate EventOnRevive;
+    public event UnitDelegate EventOnDamage;
+    public event UnitDelegate EventOnDie;
+    public event UnitDelegate EventOnRevive;
 
     public override void OnStartServer()
     {
@@ -86,17 +86,17 @@ public class Unit : Interactable
         EventOnDamage();
     }
 
-    [ClientCallback]
+    //[ClientCallback]
     protected virtual void Die()
     {
         isDead = true;
         GetComponent<Collider>().enabled = false;
+        EventOnDie();
         if (isServer)
         {
             HasInteract = false;
             RemoveFocus();
             _unitMotor.MoveToPoint(transform.position);
-            EventOnDie();
             RpcDie();
         }
     }
@@ -111,16 +111,16 @@ public class Unit : Interactable
         }
     }
 
-    [ClientCallback]
+    //[ClientCallback]
     protected virtual void Revive()
     {
         isDead = false;
         GetComponent<Collider>().enabled = true;
+        EventOnRevive();
         if (isServer)
         {
             HasInteract = true;
             _unitStats.SetHealthRate(1.0f);
-            EventOnRevive();
             RpcReviev();
         }
     }

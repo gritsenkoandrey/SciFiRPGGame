@@ -51,7 +51,7 @@ public class PlayerLoader : NetworkBehaviour
 
     public Character CreateCharacter()
     {
-        GameObject unit = Instantiate(_unitPrefab, transform.position, Quaternion.identity);
+        GameObject unit = Instantiate(_unitPrefab/*, transform.position, Quaternion.identity*/);
         NetworkServer.Spawn(unit);
         _unitIdentity = unit.GetComponent<NetworkIdentity>();
         return unit.GetComponent<Character>();
