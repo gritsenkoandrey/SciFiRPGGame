@@ -4,24 +4,17 @@ using UnityEngine.Networking;
 
 public class UnitStats : NetworkBehaviour
 {
-    [SerializeField] private int _maxHealth = 0;
+    [SerializeField] protected int maxHealth = 0;
     [SyncVar] private int _currentHealth;
 
     public Stat damage;
     public Stat armor;
     public Stat moveSpeed;
 
-    public int CurrentHealth
+    public virtual int CurrentHealth
     {
-        get
-        {
-            return _currentHealth;
-        }
-    }
-
-    public override void OnStartServer()
-    {
-        _currentHealth = _maxHealth;
+        get { return _currentHealth; }
+        protected set { _currentHealth = value; }
     }
 
     public virtual void TakeDamage(int damage)
@@ -39,6 +32,6 @@ public class UnitStats : NetworkBehaviour
 
     public void SetHealthRate(float rate)
     {
-        _currentHealth = rate == 0 ? 0 : (int)(_maxHealth / rate);
+        _currentHealth = rate == 0 ? 0 : (int)(maxHealth / rate);
     }
 }

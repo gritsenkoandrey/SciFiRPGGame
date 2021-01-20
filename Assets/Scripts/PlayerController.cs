@@ -69,12 +69,4 @@ public class PlayerController : NetworkBehaviour
     {
         _character.SetMovePoint(point);
     }
-
-    private void OnDestroy()
-    {
-        if (_character != null)
-        {
-            Destroy(_character.gameObject);
-        }
-    }
 }

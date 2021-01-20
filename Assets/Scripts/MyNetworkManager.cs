@@ -62,8 +62,9 @@ public class MyNetworkManager : NetworkManager
     // логин игрока на сервере
     private IEnumerator LoginUser(NetworkMessage netMsg)
     {
+        UserAccount account = new UserAccount(netMsg.conn);
         UserMessage msg = netMsg.ReadMessage<UserMessage>();
-        IEnumerator e = DCF.Login(msg.login, msg.password);
+        IEnumerator e = account.Login(msg.login, msg.password);
 
         while (e.MoveNext())
         {
@@ -75,7 +76,7 @@ public class MyNetworkManager : NetworkManager
         if (response == "Success")
         {
             Debug.Log("server login success");
-            netMsg.conn.Send(MsgType.Scene, new StringMessage(SceneManager.GetActiveScene().name));
+            netMsg.conn.Send(MsgType.Scene, new StringMessage(onlineScene));
         }
         else
         {

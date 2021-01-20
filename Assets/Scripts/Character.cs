@@ -15,8 +15,18 @@ public class Character : Unit
 
     void Start()
     {
-        _startPosition = transform.position;
+        _startPosition = new Vector3(250.0f, 0.0f, 250.0f);
         _reviveTime = _reviveDelay;
+
+        if (stats.CurrentHealth == 0)
+        {
+            transform.position = _startPosition;
+            if (isServer)
+            {
+                stats.SetHealthRate(1);
+                _unitMotor.MoveToPoint(_startPosition);
+            }
+        }
     }
 
     void Update()
@@ -54,8 +64,6 @@ public class Character : Unit
                 float distance = Vector3.Distance(focus.interactionTransform.position, transform.position);
                 if (distance <= focus.radius)
                 {
-                    //focus.Interact(gameObject);
-
                     if (!focus.Interact(gameObject))
                     {
                         RemoveFocus();

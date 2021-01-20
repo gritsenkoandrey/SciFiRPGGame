@@ -7,10 +7,22 @@ public class Equipment : NetworkBehaviour
     public SyncListItem items = new SyncListItem();
 
     public Player player;
+    private UserData _data;
 
     public override void OnStartLocalPlayer()
     {
         items.Callback += ItemChanged;
+    }
+
+    public void Load(UserData data)
+    {
+        _data = data;
+        for (int i = 0; i < data.equipment.Count; i++)
+        {
+            EquipmentItem item = (EquipmentItem)ItemBase.GetItem(data.equipment[i]);
+            items.Add(item);
+            item.Equip(player);
+        }
     }
 
     private void ItemChanged(SyncList<Item>.Operation op, int itemIndex)
@@ -27,12 +39,15 @@ public class Equipment : NetworkBehaviour
             {
                 oldItem = (EquipmentItem)items[i];
                 oldItem.Unequip(player);
+                _data.equipment.Remove(ItemBase.GetItemId(items[i]));
                 items.RemoveAt(i);
                 break;
             }
         }
         items.Add(item);
         item.Equip(player);
+        _data.equipment.Add(ItemBase.GetItemId(item));
+
         return oldItem;
     }
 
@@ -47,6 +62,7 @@ public class Equipment : NetworkBehaviour
         if (items[index] != null && player.inventory.AddItem(items[index]))
         {
             ((EquipmentItem)items[index]).Unequip(player);
+            _data.equipment.Remove(ItemBase.GetItemId(items[index]));
             items.RemoveAt(index);
         }
     }

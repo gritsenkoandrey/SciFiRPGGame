@@ -31,6 +31,11 @@ public class Player : MonoBehaviour
 
         if (GetComponent<NetworkIdentity>().isServer)
         {
+            UserAccount account = AccountManager.GetAccount(GetComponent<NetworkIdentity>().connectionToClient);
+            _character.stats.Load(account.data);
+            _progress.Load(account.data);
+            _inventory.Load(account.data);
+            _equipment.Load(account.data);
             _character.stats.manager = _statsManager;
             _progress.manager = _statsManager;
         }
