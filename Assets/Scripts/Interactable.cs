@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 public class Interactable : NetworkBehaviour
 {
     public Transform interactionTransform;
-    public float radius = 2.0f;
+    [SerializeField] private float _radius = 2.0f;
 
     private bool _hasInteract = true;
 
@@ -13,6 +13,11 @@ public class Interactable : NetworkBehaviour
     {
         get { return _hasInteract; }
         protected set { _hasInteract = value; }
+    }
+
+    public virtual float GetInteractDistance(GameObject user)
+    {
+        return _radius;
     }
 
     public virtual bool Interact(GameObject user)
@@ -23,6 +28,6 @@ public class Interactable : NetworkBehaviour
     protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(interactionTransform.position, radius);
+        Gizmos.DrawWireSphere(interactionTransform.position, _radius);
     }
 }

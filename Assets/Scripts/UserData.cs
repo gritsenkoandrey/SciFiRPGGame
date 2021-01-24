@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 
 [Serializable]
 public class UserData
 {
+    public NetworkHash128 characterHash = new NetworkHash128();
     public Vector3 posCharacter;
     public List<int> inventory = new List<int>();
     public List<int> equipment = new List<int>();

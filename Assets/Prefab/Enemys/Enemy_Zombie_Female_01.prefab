@@ -1878,6 +1878,7 @@ GameObject:
   - component: {fileID: 3386802239691091991}
   - component: {fileID: 3949546951568451686}
   - component: {fileID: 114938722645052550}
+  - component: {fileID: 114793685832678870}
   m_Layer: 0
   m_Name: Enemy_Zombie_Female_01
   m_TagString: Untagged
@@ -2078,7 +2079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionTransform: {fileID: 9035931880859112676}
-  radius: 2
+  _radius: 2
   _unitMotor: {fileID: 9035931880859112689}
   _unitStats: {fileID: 9035931880859112699}
   _moveRadius: 5
@@ -2087,6 +2088,7 @@ MonoBehaviour:
   _agressive: 1
   _rewardExp: 100
   _viewDistance: 5
+  _agroDistance: 5
   _revievDelay: 5
 --- !u!65 &9035931880859112679
 BoxCollider:
@@ -2129,6 +2131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0.5
+  attackDistance: 0
 --- !u!114 &3949546951568451686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2161,3 +2164,20 @@ MonoBehaviour:
     rate: 100
   - item: {fileID: 11400000, guid: 6e8c92bb467c8324db8e0ff793e3a76c, type: 2}
     rate: 40
+--- !u!114 &114793685832678870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9035931880859112677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33587c86ea2b453478cc0f3bda58766b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visRange: 35
+  _visUpdateInterval: 1
+  _visMask:
+    serializedVersion: 2
+    m_Bits: 1024

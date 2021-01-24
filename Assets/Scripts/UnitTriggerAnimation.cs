@@ -18,6 +18,7 @@ public class UnitTriggerAnimation : MonoBehaviour
     private void Damage()
     {
         _animator.SetTrigger("Damage");
+        Debug.Log("Damage");
     }
 
     private void Die()
@@ -37,10 +38,12 @@ public class UnitTriggerAnimation : MonoBehaviour
         if (Random.Range(0, 2) == 1)
         {
             _animator.SetTrigger("Attack");
+            Debug.Log("Attack");
         }
         else
         {
             _animator.SetTrigger("NextAttack");
+            Debug.Log("NextAttack");
         }
     }
 }

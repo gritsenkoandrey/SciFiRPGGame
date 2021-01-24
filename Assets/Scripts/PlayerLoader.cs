@@ -4,7 +4,6 @@ using UnityEngine.Networking;
 
 public class PlayerLoader : NetworkBehaviour
 {
-    [SerializeField] private GameObject _unitPrefab;
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private Player _player;
 
@@ -25,11 +24,18 @@ public class PlayerLoader : NetworkBehaviour
 
     public Character CreateCharacter()
     {
+        // создаём персонажа по хешу из пользовательский данных
         UserAccount account = AccountManager.GetAccount(connectionToClient);
-        GameObject unit = Instantiate(_unitPrefab, account.data.posCharacter, Quaternion.identity);
+        GameObject unitPrefab = NetworkManager.singleton.spawnPrefabs.Find(x => x.GetComponent<NetworkIdentity>().assetId.Equals(account.data.characterHash));
+        GameObject unit = Instantiate(unitPrefab, account.data.posCharacter, Quaternion.identity);
+        // указываем объект игрока для определения видимости персонажа
+        Character character = unit.GetComponent<Character>();
+        character.player = _player;
+        // реплицируем персонажа
         NetworkServer.Spawn(unit);
+        // настраиваем персонажа на клиенте которому он пренадлежит
         TargetLinkCharacter(connectionToClient, unit.GetComponent<NetworkIdentity>());
-        return unit.GetComponent<Character>();
+        return character;
     }
 
     [TargetRpc]

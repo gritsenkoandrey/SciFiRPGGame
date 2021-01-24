@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 8140223676397763467}
   - component: {fileID: 5777461149061585684}
   - component: {fileID: 5083784341742321083}
+  - component: {fileID: 114269120210660376}
   m_Layer: 0
   m_Name: Enemy_Zombie_Male_01
   m_TagString: Untagged
@@ -346,7 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionTransform: {fileID: 3326805615385743458}
-  radius: 2
+  _radius: 2
   _unitMotor: {fileID: 3326805615385743479}
   _unitStats: {fileID: 3326805615385743485}
   _moveRadius: 5
@@ -355,6 +356,7 @@ MonoBehaviour:
   _agressive: 1
   _rewardExp: 150
   _viewDistance: 5
+  _agroDistance: 5
   _revievDelay: 5
 --- !u!65 &3326805615385743457
 BoxCollider:
@@ -397,6 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackSpeed: 0.5
+  attackDistance: 0
 --- !u!114 &5777461149061585684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +432,23 @@ MonoBehaviour:
     rate: 100
   - item: {fileID: 11400000, guid: 89d12485ebff8ac4e9cde85f1ebd9e83, type: 2}
     rate: 40
+--- !u!114 &114269120210660376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3326805615385743459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33587c86ea2b453478cc0f3bda58766b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visRange: 35
+  _visUpdateInterval: 1
+  _visMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &3327071880017554815
 GameObject:
   m_ObjectHideFlags: 0

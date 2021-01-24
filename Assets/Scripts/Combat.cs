@@ -7,6 +7,8 @@ public class Combat : NetworkBehaviour
 {
     [SerializeField] private float _attackSpeed = 1.0f;
 
+    public float attackDistance = 0.0f;
+
     private UnitStats _unitStats;
     private float _attackCooldown = 0.0f;
 

@@ -9,6 +9,7 @@ public class Unit : Interactable
     public UnitStats stats { get { return _unitStats; } }
 
     protected Interactable focus;
+    protected float interactDistance;
     protected bool isDead;
 
     public delegate void UnitDelegate();
@@ -52,6 +53,12 @@ public class Unit : Interactable
         }
     }
 
+    public override float GetInteractDistance(GameObject user)
+    {
+        Combat combat = user.GetComponent<Combat>();
+        return base.GetInteractDistance(user) + (combat != null ? combat.attackDistance : 0.0f);
+    }
+
     public override bool Interact(GameObject user)
     {
         Combat combat = user.GetComponent<Combat>();
@@ -71,7 +78,8 @@ public class Unit : Interactable
         if (newFocus != focus)
         {
             focus = newFocus;
-            _unitMotor.FollowTarget(newFocus);
+            interactDistance = focus.GetInteractDistance(gameObject);
+            _unitMotor.FollowTarget(newFocus, interactDistance);
         }
     }
 
@@ -86,7 +94,6 @@ public class Unit : Interactable
         EventOnDamage();
     }
 
-    //[ClientCallback]
     protected virtual void Die()
     {
         isDead = true;
@@ -101,7 +108,6 @@ public class Unit : Interactable
         }
     }
 
-    // [ClientRpc] команда, которая выполняется на клиенте
     [ClientRpc]
     private void RpcDie()
     {
@@ -111,7 +117,6 @@ public class Unit : Interactable
         }
     }
 
-    //[ClientCallback]
     protected virtual void Revive()
     {
         isDead = false;

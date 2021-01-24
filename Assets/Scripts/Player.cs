@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     public Inventory inventory { get { return _inventory; } }
     public Equipment equipment { get { return _equipment; } }
     public PlayerProgress progress { get { return _progress; } }
+    public NetworkConnection connection { get { if (_connection == null) _connection = GetComponent<NetworkIdentity>().connectionToClient; return _connection; } }
+
+    private NetworkConnection _connection;
 
     public void Setup(Character character, Inventory inventory, Equipment equipment, bool isLocalPlayer)
     {

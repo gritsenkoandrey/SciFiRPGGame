@@ -62,7 +62,7 @@ public class Character : Unit
             else
             {
                 float distance = Vector3.Distance(focus.interactionTransform.position, transform.position);
-                if (distance <= focus.radius)
+                if (distance <= interactDistance)
                 {
                     if (!focus.Interact(gameObject))
                     {

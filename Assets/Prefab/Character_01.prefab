@@ -91,8 +91,9 @@ GameObject:
   - component: {fileID: 8809922617727767779}
   - component: {fileID: 5624046598001753291}
   - component: {fileID: 6895498126742447235}
+  - component: {fileID: 114980726027525772}
   m_Layer: 10
-  m_Name: PlayerUnit
+  m_Name: Character_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionTransform: {fileID: 4291519870253466595}
-  radius: 2
+  _radius: 2
   _unitMotor: {fileID: 4291519870253466593}
   _unitStats: {fileID: 1466155843556179993}
   _reviveDelay: 5
@@ -198,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 4558725019415802481}
-  m_ParameterSendBits: 1
+  m_ParameterSendBits: 63
   param0: 
   param1: 
   param2: 
@@ -287,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d31024fe23cfaaf4b8f5fd1bc2a67941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 1000
   damage:
     _baseValue: 10
   armor:
@@ -337,7 +338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5eaa48e45610204f9110671b41cba8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackSpeed: 1
+  _attackSpeed: 0.5
+  attackDistance: 2
 --- !u!114 &6895498126742447235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +355,23 @@ MonoBehaviour:
   _animator: {fileID: 4558725019415802481}
   _unit: {fileID: 543975326570962468}
   _combat: {fileID: 5624046598001753291}
+--- !u!114 &114980726027525772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4291519870253466597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33587c86ea2b453478cc0f3bda58766b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visRange: 35
+  _visUpdateInterval: 1
+  _visMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &4418922633808448850
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +642,7 @@ Animator:
   m_GameObject: {fileID: 4472548071927560671}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ffdfcb810f2918b4f8fe9f917f07bc78, type: 3}
-  m_Controller: {fileID: 9100000, guid: 3331da4eacc7ede4b8014069633fe535, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3ddcf7eb3e8b16841b9cd79d9a0b5042, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

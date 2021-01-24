@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 5272475211872773274}
   - component: {fileID: 848556367509774629}
   - component: {fileID: 3219158917411852417}
+  - component: {fileID: 114038278642489144}
   m_Layer: 0
   m_Name: BatWood
   m_TagString: Untagged
@@ -172,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionTransform: {fileID: 2545215579788918573}
-  radius: 1
+  _radius: 2
   item: {fileID: 11400000, guid: 6e8c92bb467c8324db8e0ff793e3a76c, type: 2}
   lifetime: 10
 --- !u!65 &3219158917411852417
@@ -188,6 +189,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2, z: 1}
   m_Center: {x: 0, y: 0, z: 0.5}
+--- !u!114 &114038278642489144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7899244259855063321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33587c86ea2b453478cc0f3bda58766b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visRange: 35
+  _visUpdateInterval: 1
+  _visMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &7931983982329007646
 GameObject:
   m_ObjectHideFlags: 0

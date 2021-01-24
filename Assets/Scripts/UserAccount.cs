@@ -62,7 +62,7 @@ public class UserAccount
         }
         else
         {
-            Debug.Log("Server login fail");
+            Debug.Log("server login fail with error: " + eLogin.Current);
             yield return eLogin.Current;
         }
     }
