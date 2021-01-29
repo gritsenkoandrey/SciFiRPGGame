@@ -81,15 +81,15 @@ public class Enemy : Unit
         }
     }
 
-    public override bool Interact(GameObject user)
-    {
-        if (base.Interact(user))
-        {
-            SetFocus(user.GetComponent<Interactable>());
-            return true;
-        }
-        return false;
-    }
+    //public override bool Interact(GameObject user)
+    //{
+    //    if (base.Interact(user))
+    //    {
+    //        SetFocus(user.GetComponent<Interactable>());
+    //        return true;
+    //    }
+    //    return false;
+    //}
 
     private void FindEnemy()
     {
@@ -112,7 +112,7 @@ public class Enemy : Unit
         transform.position = _startPosition;
         if (isServer)
         {
-            _unitMotor.MoveToPoint(_startPosition);
+            Motor.MoveToPoint(_startPosition);
         }
     }
 
@@ -143,7 +143,7 @@ public class Enemy : Unit
     {
         _currentDistanation = Quaternion.AngleAxis(Random.Range(0.0f, 360.0f), Vector3.up)
             * new Vector3(_moveRadius, 0.0f, 0.0f) + _startPosition;
-        _unitMotor.MoveToPoint(_currentDistanation);
+        Motor.MoveToPoint(_currentDistanation);
     }
 
     protected override void OnDrawGizmosSelected()
@@ -157,10 +157,15 @@ public class Enemy : Unit
     protected override void DamageWithCombat(GameObject user)
     {
         base.DamageWithCombat(user);
-        Character character = user.GetComponent<Character>();
-        if (character != null && !_enemies.Contains(character))
+        Unit enemy = user.GetComponent<Unit>();
+        if (enemy != null)
         {
-            _enemies.Add(character);
+            SetFocus(enemy.GetComponent<Interactable>());
+            Character character = enemy as Character;
+            if (character != null && !_enemies.Contains(character))
+            {
+                _enemies.Add(character);
+            }
         }
     }
 }

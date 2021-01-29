@@ -4,27 +4,27 @@
 [RequireComponent(typeof(UnitMotor), typeof(PlayerStats))]
 public class Character : Unit
 {
-    [SerializeField] private float _reviveDelay = 5f;
+    [SerializeField] private float _reviveDelay = 5.0f;
     [SerializeField] private GameObject _gfx;
 
     private Vector3 _startPosition;
     private float _reviveTime;
     public Player player;
 
-    new public PlayerStats stats { get { return _unitStats as PlayerStats; } }
+    new public PlayerStats Stats { get { return base.Stats as PlayerStats; } }
 
     void Start()
     {
         _startPosition = new Vector3(250.0f, 0.0f, 250.0f);
         _reviveTime = _reviveDelay;
 
-        if (stats.CurrentHealth == 0)
+        if (Stats.CurrentHealth == 0)
         {
             transform.position = _startPosition;
             if (isServer)
             {
-                stats.SetHealthRate(1);
-                _unitMotor.MoveToPoint(_startPosition);
+                Stats.SetHealthRate(1);
+                Motor.MoveToPoint(_startPosition);
             }
         }
     }
@@ -88,7 +88,7 @@ public class Character : Unit
         _gfx.SetActive(true);
         if (isServer)
         {
-            _unitMotor.MoveToPoint(_startPosition);
+            Motor.MoveToPoint(_startPosition);
         }
     }
 
@@ -97,7 +97,7 @@ public class Character : Unit
         if (!isDead)
         {
             RemoveFocus();
-            _unitMotor.MoveToPoint(point);
+            Motor.MoveToPoint(point);
         }
     }
 

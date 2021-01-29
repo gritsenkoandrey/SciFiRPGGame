@@ -4,11 +4,14 @@ using UnityEngine.Networking;
 [System.Obsolete]
 public class Unit : Interactable
 {
-    [SerializeField] protected UnitMotor _unitMotor;
-    [SerializeField] protected UnitStats _unitStats;
-    public UnitStats stats { get { return _unitStats; } }
+    [SerializeField] private UnitMotor _unitMotor;
+    [SerializeField] private UnitStats _unitStats;
+    public UnitStats Stats { get { return _unitStats; } }
+    public UnitMotor Motor { get { return _unitMotor; } }
+    public UnitSkills unitSkills;
 
     protected Interactable focus;
+    public Interactable Focus { get { return focus; } }
     protected float interactDistance;
     protected bool isDead;
 
@@ -53,6 +56,14 @@ public class Unit : Interactable
         }
     }
 
+    public void UseSkill(int skillNum)
+    {
+        if (!isDead && skillNum < unitSkills.Count)
+        {
+            unitSkills[skillNum].Use(this);
+        }
+    }
+
     public override float GetInteractDistance(GameObject user)
     {
         Combat combat = user.GetComponent<Combat>();
@@ -73,7 +84,7 @@ public class Unit : Interactable
         return base.Interact(user);
     }
 
-    protected virtual void SetFocus(Interactable newFocus)
+    public virtual void SetFocus(Interactable newFocus)
     {
         if (newFocus != focus)
         {
@@ -83,7 +94,7 @@ public class Unit : Interactable
         }
     }
 
-    protected virtual void RemoveFocus()
+    public virtual void RemoveFocus()
     {
         focus = null;
         _unitMotor.StopFollowingTarget();
@@ -92,6 +103,12 @@ public class Unit : Interactable
     protected virtual void DamageWithCombat(GameObject user)
     {
         EventOnDamage();
+    }
+
+    public void TakeDamage(GameObject user, int damage)
+    {
+        _unitStats.TakeDamage(damage);
+        DamageWithCombat(user);
     }
 
     protected virtual void Die()

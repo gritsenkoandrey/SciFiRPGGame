@@ -350,6 +350,8 @@ MonoBehaviour:
   _radius: 2
   _unitMotor: {fileID: 3326805615385743479}
   _unitStats: {fileID: 3326805615385743485}
+  unitSkills:
+    _skills: []
   _moveRadius: 5
   _minMoveDelay: 5
   _maxMoveDelay: 10

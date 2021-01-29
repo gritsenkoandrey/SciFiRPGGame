@@ -22,11 +22,11 @@ public class StatsManager : NetworkBehaviour
         {
             switch(stat)
             {
-                case (int)StatType.Damage: player.character.stats.damage.baseValue++;
+                case (int)StatType.Damage: player.character.Stats.damage.baseValue++;
                     break;
-                case (int)StatType.Armor: player.character.stats.armor.baseValue++;
+                case (int)StatType.Armor: player.character.Stats.armor.baseValue++;
                     break;
-                case (int)StatType.MoveSpeed: player.character.stats.moveSpeed.baseValue++;
+                case (int)StatType.MoveSpeed: player.character.Stats.moveSpeed.baseValue++;
                     break;
             }
         }

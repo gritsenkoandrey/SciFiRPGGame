@@ -22,16 +22,25 @@ public class UnitStats : NetworkBehaviour
         damage -= armor.GetValue();
         if (damage > 0)
         {
-            _currentHealth -= damage;
-            if (_currentHealth <= 0)
+            CurrentHealth -= damage;
+            if (CurrentHealth <= 0)
             {
-                _currentHealth = 0;
+                CurrentHealth = 0;
             }
         }
     }
 
     public void SetHealthRate(float rate)
     {
-        _currentHealth = rate == 0 ? 0 : (int)(maxHealth / rate);
+        CurrentHealth = rate == 0 ? 0 : (int)(maxHealth / rate);
+    }
+
+    public void AddHealth(int amount)
+    {
+        CurrentHealth += amount;
+        if (CurrentHealth > maxHealth)
+        {
+            CurrentHealth = maxHealth;
+        }
     }
 }

@@ -25,7 +25,7 @@ public class EquipmentItem : Item
     {
         if (player != null)
         {
-            UnitStats stats = player.character.stats;
+            UnitStats stats = player.character.Stats;
             stats.damage.AddModifier(damageModifier);
             stats.armor.AddModifier(armorModifier);
             stats.moveSpeed.AddModifier(speedModifier);
@@ -36,7 +36,7 @@ public class EquipmentItem : Item
     {
         if (player != null)
         {
-            UnitStats stats = player.character.stats;
+            UnitStats stats = player.character.Stats;
             stats.damage.RemoveModifier(damageModifier);
             stats.armor.RemoveModifier(armorModifier);
             stats.moveSpeed.RemoveModifier(speedModifier);
