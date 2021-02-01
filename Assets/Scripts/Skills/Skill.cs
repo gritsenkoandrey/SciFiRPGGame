@@ -7,8 +7,8 @@ public class Skill : NetworkBehaviour
 {
     public Sprite icon;
 
-    [SerializeField] private float _castTime = 1.0f;
-    [SerializeField] private float _cooldown = 1.0f;
+    [SerializeField] protected float castTime = 1.0f;
+    [SerializeField] protected float cooldown = 1.0f;
 
     [HideInInspector] public float castDelay;
     [HideInInspector] public float cooldownDelay;
@@ -68,12 +68,12 @@ public class Skill : NetworkBehaviour
         if (isServer)
         {
             RpcOnUse(_skillIndex, unit.gameObject, target != null ? target.gameObject : null);
-            if (_castTime > 0) castDelay = _castTime;
+            if (castTime > 0) castDelay = castTime;
             else OnCastComplete();
         }
         else
         {
-            if (_castTime > 0) castDelay = _castTime;
+            if (castTime > 0) castDelay = castTime;
         }
     }
 
@@ -82,12 +82,12 @@ public class Skill : NetworkBehaviour
         if (isServer)
         {
             RpcOnCastComplete(_skillIndex);
-            if (_cooldown > 0) cooldownDelay = _cooldown;
+            if (cooldown > 0) cooldownDelay = cooldown;
             else OnCooldownComplete();
         }
         else
         {
-            if (_cooldown > 0) cooldownDelay = _cooldown;
+            if (cooldown > 0) cooldownDelay = cooldown;
         }
     }
 

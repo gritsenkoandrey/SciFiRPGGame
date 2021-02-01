@@ -11,9 +11,11 @@ public class UserData
     public Vector3 posCharacter;
     public List<int> inventory = new List<int>();
     public List<int> equipment = new List<int>();
+    public List<int> skills = new List<int>();
 
     public int level;
     public int statPoints;
+    public int skillPoints;
     public float exp;
     public float nextLevelExp;
     public int curHealth;

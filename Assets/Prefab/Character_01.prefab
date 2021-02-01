@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 4558725019415802481}
-  m_ParameterSendBits: 63
+  m_ParameterSendBits: 33
   param0: 
   param1: 
   param2: 
@@ -395,8 +395,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300010, guid: 9b36398ba5aa47940bdd92db1e4b0d4e, type: 3}
-  _castTime: 0
-  _cooldown: 5
+  castTime: 1
+  cooldown: 1
   castDelay: 0
   cooldownDelay: 0
   _healAmount: 15
@@ -414,8 +414,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300008, guid: 9b36398ba5aa47940bdd92db1e4b0d4e, type: 3}
-  _castTime: 0.2
-  _cooldown: 0.8
+  castTime: 1
+  cooldown: 1
   castDelay: 0
   cooldownDelay: 0
   _warpDistance: 10
@@ -432,8 +432,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300006, guid: 9b36398ba5aa47940bdd92db1e4b0d4e, type: 3}
-  _castTime: 0
-  _cooldown: 5
+  castTime: 1
+  cooldown: 1
   castDelay: 0
   cooldownDelay: 0
   _damage: 100

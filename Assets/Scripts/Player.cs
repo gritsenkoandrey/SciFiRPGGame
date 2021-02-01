@@ -12,18 +12,28 @@ public class Player : MonoBehaviour
 
     [SerializeField] private StatsManager _statsManager;
 
+    private NetworkConnection _connection;
+
     public Character character { get { return _character; } }
     public Inventory inventory { get { return _inventory; } }
     public Equipment equipment { get { return _equipment; } }
     public PlayerProgress progress { get { return _progress; } }
-    public NetworkConnection connection { get { if (_connection == null) _connection = GetComponent<NetworkIdentity>().connectionToClient; return _connection; } }
+    public NetworkConnection connection
+    { 
+        get 
+        { if (_connection == null)
+            {
+                _connection = GetComponent<NetworkIdentity>().connectionToClient;
+            }
 
-    private NetworkConnection _connection;
+            return _connection;
+        }
+    }
 
     public void Setup(Character character, Inventory inventory, Equipment equipment, bool isLocalPlayer)
     {
-        _statsManager = GetComponent<StatsManager>();
         _progress = GetComponent<PlayerProgress>();
+        _statsManager = GetComponent<StatsManager>();
         _character = character;
         _inventory = inventory;
         _equipment = equipment;
@@ -36,6 +46,7 @@ public class Player : MonoBehaviour
         {
             UserAccount account = AccountManager.GetAccount(GetComponent<NetworkIdentity>().connectionToClient);
             _character.Stats.Load(account.data);
+            _character.unitSkills.Load(account.data);
             _progress.Load(account.data);
             _inventory.Load(account.data);
             _equipment.Load(account.data);
@@ -48,6 +59,9 @@ public class Player : MonoBehaviour
             InventoryUi.instance.SetInventory(_inventory);
             EquipmentUi.instance.SetEquipment(_equipment);
             StatsUi.Instance.SetManager(_statsManager);
+            SkillsPanel.Instance.SetSkills(character.unitSkills);
+            SkillTree.Instance.SetCharacter(character);
+            SkillTree.Instance.SetManager(_statsManager);
         }
     }
 }

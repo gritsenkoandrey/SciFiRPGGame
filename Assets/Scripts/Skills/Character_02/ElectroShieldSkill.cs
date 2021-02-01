@@ -1,12 +1,21 @@
 ﻿using UnityEngine;
 
 
-public class ElectroShieldSkill : Skill
+public class ElectroShieldSkill : UpgradeableSkill
 {
     [SerializeField] private int _damage;
     [SerializeField] private float _radius;
     [SerializeField] private LayerMask _enemyMask;
     [SerializeField] private ParticleSystem _electroEffect;
+
+    public override int Level
+    {
+        set
+        {
+            base.Level = value;
+            _damage = 25 + 5 * Level;
+        }
+    }
 
     protected override void OnUse()
     {

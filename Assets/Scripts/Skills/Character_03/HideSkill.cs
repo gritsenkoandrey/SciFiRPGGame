@@ -1,9 +1,18 @@
 ﻿using UnityEngine;
 
 
-public class HideSkill : Skill
+public class HideSkill : UpgradeableSkill
 {
-    [SerializeField] private ParticleSystem _hideEffect;
+    [SerializeField] private ParticleSystem _hideEffect = null;
+
+    public override int Level
+    {
+        set
+        {
+            base.Level = value;
+            castTime = Level < 10 ? 10 - Level : 1;
+        }
+    }
 
     protected override void OnUse()
     {

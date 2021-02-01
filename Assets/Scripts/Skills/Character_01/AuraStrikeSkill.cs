@@ -1,12 +1,21 @@
 ﻿using UnityEngine;
 
 
-public class AuraStrikeSkill : Skill
+public class AuraStrikeSkill : UpgradeableSkill
 {
     [SerializeField] private int _damage = 0;
     [SerializeField] private float _radius = 0.0f;
     [SerializeField] private LayerMask _enemyMask;
     [SerializeField] private ParticleSystem _auraEffect = null;
+
+    public override int Level
+    {
+        set
+        {
+            base.Level = value;
+            _damage = 10 + Level;
+        }
+    }
 
     protected override void OnUse()
     {

@@ -33,7 +33,7 @@ public class Combat : NetworkBehaviour
         if (_attackCooldown <= 0)
         {
             targetStats.TakeDamage(_unitStats.damage.GetValue());
-            EventOnAttack();
+            EventOnAttack?.Invoke();
             _attackCooldown = 1.0f / _attackSpeed;
             return true;
         }

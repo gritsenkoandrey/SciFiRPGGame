@@ -6,6 +6,7 @@ using UnityEngine;
 public class UnitSkills
 {
     [SerializeField] private Skill[] _skills = null;
+    private UserData _data;
 
     public Skill this [int index]
     {
@@ -27,6 +28,37 @@ public class UnitSkills
                 }
             }
             return false;
+        }
+    }
+
+    public void Load(UserData data)
+    {
+        this._data = data;
+        for (int i = 0; i < _skills.Length; i++)
+        {
+            UpgradeableSkill skill = _skills[i] as UpgradeableSkill;
+            if (i >= data.skills.Count)
+            {
+                data.skills.Add(skill.Level);
+            }
+            else
+            {
+                skill.Level = data.skills[i];
+            }
+
+            skill.OnSetLevel += ChangeLevel;
+        }
+    }
+
+    private void ChangeLevel(UpgradeableSkill skill, int newLevel)
+    {
+        for (int i = 0; i < _skills.Length; i++)
+        {
+            if (_skills[i] == skill)
+            {
+                _data.skills[i] = newLevel;
+                break;
+            }
         }
     }
 }

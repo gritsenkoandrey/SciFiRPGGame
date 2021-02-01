@@ -102,7 +102,7 @@ public class Unit : Interactable
 
     protected virtual void DamageWithCombat(GameObject user)
     {
-        EventOnDamage();
+        EventOnDamage?.Invoke();
     }
 
     public void TakeDamage(GameObject user, int damage)
@@ -115,7 +115,7 @@ public class Unit : Interactable
     {
         isDead = true;
         GetComponent<Collider>().enabled = false;
-        EventOnDie();
+        EventOnDie?.Invoke();
         if (isServer)
         {
             HasInteract = false;
@@ -138,7 +138,7 @@ public class Unit : Interactable
     {
         isDead = false;
         GetComponent<Collider>().enabled = true;
-        EventOnRevive();
+        EventOnRevive?.Invoke();
         if (isServer)
         {
             HasInteract = true;

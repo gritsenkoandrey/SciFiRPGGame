@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public class MeteorStrikeSkill : Skill
+public class MeteorStrikeSkill : UpgradeableSkill
 {
     [SerializeField] private float _range = 7f;
     [SerializeField] private float _radius = 3f;
@@ -9,6 +9,16 @@ public class MeteorStrikeSkill : Skill
     [SerializeField] private LayerMask _enemyMask;
     [SerializeField] private ParticleSystem _castEffect;
     [SerializeField] private ParticleSystem _meteorStrikeEffect;
+
+    public override int Level
+    {
+        set
+        {
+            base.Level = value;
+            _damage = 25 + 7 * Level;
+            _range = Level < 3 ? 7f : 10f;
+        }
+    }
 
     protected override void Start()
     {

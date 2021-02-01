@@ -9,6 +9,7 @@ public class StatsManager : NetworkBehaviour
 
     [SyncVar] public int level;
     [SyncVar] public int statPoints;
+    [SyncVar] public int skillPoints;
 
     [SyncVar] public float exp;
     [SyncVar] public float nextLevelExp;
@@ -28,6 +29,19 @@ public class StatsManager : NetworkBehaviour
                     break;
                 case (int)StatType.MoveSpeed: player.character.Stats.moveSpeed.baseValue++;
                     break;
+            }
+        }
+    }
+
+    [Command]
+    public void CmdUpgradeSkill(int index)
+    {
+        if (player.progress.RemoveSkillPoint())
+        {
+            UpgradeableSkill skill = player.character.unitSkills[index] as UpgradeableSkill;
+            if (skill != null)
+            {
+                skill.Level++;
             }
         }
     }

@@ -5,6 +5,7 @@ public class PlayerProgress : MonoBehaviour
 {
     private int _level = 1;
     private int _statPoints;
+    private int _skillPoints;
 
     private float _exp;
     private float _nextLevelExp = 100.0f;
@@ -21,6 +22,7 @@ public class PlayerProgress : MonoBehaviour
             _manager.nextLevelExp = _nextLevelExp;
             _manager.level = _level;
             _manager.statPoints = _statPoints;
+            _manager.skillPoints = _skillPoints;
         }
     }
 
@@ -33,6 +35,7 @@ public class PlayerProgress : MonoBehaviour
             _level = data.level;
         }
         _statPoints = data.statPoints;
+        _skillPoints = data.skillPoints;
         _exp = data.exp;
 
         if (data.nextLevelExp > 0)
@@ -61,6 +64,7 @@ public class PlayerProgress : MonoBehaviour
         while (_exp >= _nextLevelExp)
         {
             _data.exp = _exp -= _nextLevelExp;
+            Debug.Log("LEVEL UP");
             LevelUp();
         }
 
@@ -70,7 +74,19 @@ public class PlayerProgress : MonoBehaviour
             _manager.level = _level;
             _manager.nextLevelExp = _nextLevelExp;
             _manager.statPoints = _statPoints;
+            _manager.skillPoints = _skillPoints;
         }
+    }
+
+    public bool RemoveSkillPoint()
+    {
+        if (_skillPoints > 0)
+        {
+            _data.skillPoints = --_skillPoints;
+            if (_manager != null) _manager.skillPoints = _skillPoints;
+            return true;
+        }
+        return false;
     }
 
     private void LevelUp()
@@ -78,5 +94,6 @@ public class PlayerProgress : MonoBehaviour
         _data.level = ++ _level;
         _data.nextLevelExp = _nextLevelExp += 100f;
         _data.statPoints = _statPoints += 3;
+        _data.skillPoints = _skillPoints += 1;
     }
 }
