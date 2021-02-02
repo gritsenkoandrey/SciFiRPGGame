@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 114930821663822086}
   - component: {fileID: 114446517670260076}
   - component: {fileID: 114896505175956974}
+  - component: {fileID: 114186853539735740}
   m_Layer: 10
   m_Name: Character_01
   m_TagString: Untagged
@@ -442,6 +443,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   _auraEffect: {fileID: 1036260015545254437}
+--- !u!114 &114186853539735740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4291519870253466597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256fa3fb1840b6a4e8194fd5675ff3ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Local
 --- !u!1 &4418922633808448850
 GameObject:
   m_ObjectHideFlags: 0

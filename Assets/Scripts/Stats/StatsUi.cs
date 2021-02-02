@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class StatsUi : MonoBehaviour
@@ -42,7 +43,7 @@ public class StatsUi : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Stats"))
+        if (Input.GetButtonDown("Stats") && EventSystem.current.currentSelectedGameObject == null)
         {
             _statsUI.SetActive(!_statsUI.activeSelf);
         }

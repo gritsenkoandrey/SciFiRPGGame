@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.EventSystems;
 
 public class InventoryUi : MonoBehaviour
 {
@@ -25,7 +25,7 @@ public class InventoryUi : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Inventory"))
+        if (Input.GetButtonDown("Inventory") && EventSystem.current.currentSelectedGameObject == null)
         {
             _inventoryUi.SetActive(!_inventoryUi.activeSelf);
         }

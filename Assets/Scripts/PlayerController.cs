@@ -49,10 +49,14 @@ public class PlayerController : NetworkBehaviour
                         }
                     }
                 }
-                //использование навыков
-                if (Input.GetButtonDown("Skill1")) CmdUseSkill(0);
-                if (Input.GetButtonDown("Skill2")) CmdUseSkill(1);
-                if (Input.GetButtonDown("Skill3")) CmdUseSkill(2);
+
+                if (EventSystem.current.currentSelectedGameObject == null)
+                {
+                    //использование навыков
+                    if (Input.GetButtonDown("Skill1")) CmdUseSkill(0);
+                    if (Input.GetButtonDown("Skill2")) CmdUseSkill(1);
+                    if (Input.GetButtonDown("Skill3")) CmdUseSkill(2);
+                }
             }
         }
     }

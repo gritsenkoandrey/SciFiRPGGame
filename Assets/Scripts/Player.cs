@@ -62,6 +62,15 @@ public class Player : MonoBehaviour
             SkillsPanel.Instance.SetSkills(character.unitSkills);
             SkillTree.Instance.SetCharacter(character);
             SkillTree.Instance.SetManager(_statsManager);
+
+            PlayerChat playerChat = GetComponent<PlayerChat>();
+            if (playerChat != null)
+            {
+                if (GlobalChatChannel.instance != null) playerChat.RegisterChannel(GlobalChatChannel.instance);
+                ChatChannel localChannel = _character.GetComponent<ChatChannel>();
+                if (localChannel != null) playerChat.RegisterChannel(localChannel);
+                ChatUI.Instance.SetPlayerChat(playerChat);
+            }
         }
     }
 }

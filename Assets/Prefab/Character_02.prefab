@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114170937747390050}
   - component: {fileID: 114072408993474886}
   - component: {fileID: 114807918035398444}
+  - component: {fileID: 3265527998018195474}
   m_Layer: 10
   m_Name: Character_02
   m_TagString: Untagged
@@ -326,8 +327,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300010, guid: 9b36398ba5aa47940bdd92db1e4b0d4e, type: 3}
-  _castTime: 0
-  _cooldown: 5
+  castTime: 1
+  cooldown: 1
   castDelay: 0
   cooldownDelay: 0
   _healAmount: 25
@@ -345,8 +346,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300008, guid: 9b36398ba5aa47940bdd92db1e4b0d4e, type: 3}
-  _castTime: 1
-  _cooldown: 1
+  castTime: 1
+  cooldown: 1
   castDelay: 0
   cooldownDelay: 0
   _warpDistance: 10
@@ -363,8 +364,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300006, guid: 9b36398ba5aa47940bdd92db1e4b0d4e, type: 3}
-  _castTime: 0
-  _cooldown: 5
+  castTime: 1
+  cooldown: 1
   castDelay: 0
   cooldownDelay: 0
   _damage: 100
@@ -373,6 +374,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   _auraEffect: {fileID: 1292971137911633855}
+--- !u!114 &3265527998018195474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2916797038413223871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256fa3fb1840b6a4e8194fd5675ff3ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Local
 --- !u!1 &2916797038746831386
 GameObject:
   m_ObjectHideFlags: 0
